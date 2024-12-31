@@ -1,0 +1,345 @@
+<ion-header class="ion-no-border" style="margin-top: 5%;">
+  <ion-toolbar>
+    <ion-title style="flex-grow: 1; text-align: center; font-size: 18px; font-weight: bold;">
+
+    </ion-title>
+
+    <ion-buttons slot="end" style="display: flex; align-items: center;">
+      <p style="margin-right: 10px; font-size: 14px; color: black; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+        {{ currentDate | date: 'dd/MM/yyyy' }}
+      </p>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="RefreshProcedure()" class="refresh-button" style="padding: 8px;">
+        <img loading="lazy" src="../../../assets/icon/arrows-rotate-solid.svg" alt="refresh" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-light">
+  <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+  <!-- General Data Table -->
+  <ion-card *ngIf="isDataLoaded && data.rows.length > 0" class="data-card my-4 shadow-lg">
+    <ion-card-header>
+      <ion-card-title class="bg-primary text-white text-center">Données Générales</ion-card-title>
+    </ion-card-header>
+
+    <ion-col>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Libellé</th>
+              <th class="text-right">Nombre</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of data.rows">
+              <td>{{ row.title }}</td>
+              <td class="text-right">{{ row.number }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ion-col>
+  </ion-card>
+
+  <!-- VIP Residents Table -->
+  <ion-card *ngIf="isDataLoaded && paginatedVipData.length > 0" class="table-card my-4 shadow-lg" style="overflow-x: auto;">
+    <ion-card-header>
+      <ion-card-title class="bg-white text-dark text-center">{{ detailTitles[0] }}</ion-card-title>
+    </ion-card-header>
+    <ion-col>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Chambre</th>
+              <th>Nom</th>
+              <th>Arrivée</th>
+              <th>Départ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of paginatedVipData">
+              <td>{{ item.chambre }}</td>
+              <td>{{ item.nom }}</td>
+              <td>{{ item.arrivee }}</td>
+              <td>{{ item.depart }}</td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <!-- Pagination Controls -->
+        <div class="pagination-container">
+          <!-- Go to First Page -->
+          <ion-button fill="clear" (click)="goToPageVIP(1)" [disabled]="currentPageVip === 1" class="pagination-button">«</ion-button>
+          
+          <!-- Go to Previous Page -->
+          <ion-button fill="clear" (click)="prevPageVIP()" [disabled]="currentPageVip === 1" class="pagination-button">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+          </ion-button>
+          
+          <!-- Page Numbers (3 numbers) -->
+          <div class="page-number-container">
+            <ion-button *ngFor="let pageVIP of pageNumbersVIP"
+                        (click)="goToPageVIP(pageVIP)"
+                        [ngClass]="{'active-page': currentPageVip === pageVIP}"
+                        fill="clear" class="pagination-button">
+              {{ pageVIP }}
+            </ion-button>
+          </div>
+          
+          <!-- Go to Next Page -->
+          <ion-button fill="clear" (click)="nextPageVIP()" [disabled]="currentPageVip === totalPagesVIP" class="pagination-button">
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </ion-button>
+          
+          <!-- Go to Last Page -->
+          <ion-button fill="clear" (click)="goToPageVIP(totalPagesVIP)" [disabled]="currentPageVip === totalPagesVIP" class="pagination-button">»</ion-button>
+        </div>
+        
+        
+      </div>
+    </ion-col>
+  </ion-card>
+  
+
+  <!-- Offers Table -->
+  <!-- Offers Table -->
+<ion-card *ngIf="isDataLoaded && offersData.length > 0" class="table-card my-4 shadow-lg" style="overflow-x: auto;">
+  <ion-card-header>
+    <ion-card-title class="bg-white text-dark text-center">{{ detailTitles[1] }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-col>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Chambre</th>
+            <th>Nom</th>
+            <th>Arrivée</th>
+            <th>Départ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of paginatedOffersData">
+            <td>{{ item.chambre }}</td>
+            <td>{{ item.nom }}</td>
+            <td>{{ item.arrivee }}</td>
+            <td>{{ item.depart }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="pagination-container">
+        <!-- Go to First Page -->
+        <ion-button fill="clear" (click)="goToPageOffre(1)" [disabled]="currentPageOffre === 1" class="pagination-button">«</ion-button>
+        
+        <!-- Go to Previous Page -->
+        <ion-button fill="clear" (click)="prevPageOffre()" [disabled]="currentPageOffre === 1" class="pagination-button">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        
+        <!-- Page Numbers (Always 3 numbers) -->
+        <div class="page-number-container">
+          <ion-button *ngFor="let pageOffre of pageNumbersOffre"
+                      (click)="goToPageOffre(pageOffre)"
+                      [ngClass]="{'active-page': currentPageOffre === pageOffre}"
+                      fill="clear" class="pagination-button">
+            {{ pageOffre }}
+          </ion-button>
+        </div>
+        
+        <!-- Go to Next Page -->
+        <ion-button fill="clear" (click)="nextPageOffre()" [disabled]="currentPageOffre === totalPagesOffre" class="pagination-button">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+        
+        <!-- Go to Last Page -->
+        <ion-button fill="clear" (click)="goToPageOffre(totalPagesOffre)" [disabled]="currentPageOffre === totalPagesOffre" class="pagination-button">»</ion-button>
+      </div>
+      
+      
+    </div>
+  </ion-col>
+</ion-card>
+
+<!-- Anniversaries Table -->
+<ion-card *ngIf="isDataLoaded && anniversariesData.length > 0" class="table-card my-4 shadow-lg">
+  <ion-card-header>
+    <ion-card-title class="bg-white text-dark text-center">{{ detailTitles[2] }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-col>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Chambre</th>
+            <th>Nom</th>
+            <th>Arrivée</th>
+            <th>Départ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of paginatedAnniversariesData">
+            <td>{{ item.chambre }}</td>
+            <td>{{ item.nom }}</td>
+            <td>{{ item.arrivee }}</td>
+            <td>{{ item.depart }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="pagination-container">
+        <!-- Go to First Page -->
+        <ion-button fill="clear" (click)="goToPageAnnif(1)" [disabled]="currentPageAnnif === 1" class="pagination-button">«</ion-button>
+        
+        <!-- Go to Previous Page -->
+        <ion-button fill="clear" (click)="prevPageAnnif()" [disabled]="currentPageAnnif === 1" class="pagination-button">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        
+        <!-- Page Numbers (Always 3 numbers) -->
+        <div class="page-number-container">
+          <ion-button *ngFor="let pageAnnif of pageNumbersAnnif"
+                      (click)="goToPageAnnif(pageAnnif)"
+                      [ngClass]="{'active-page': currentPageAnnif === pageAnnif}"
+                      fill="clear" class="pagination-button">
+            {{ pageAnnif }}
+          </ion-button>
+        </div>
+        
+        <!-- Go to Next Page -->
+        <ion-button fill="clear" (click)="nextPageAnnif()" [disabled]="currentPageAnnif === totalPagesAnnif" class="pagination-button">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+        
+        <!-- Go to Last Page -->
+        <ion-button fill="clear" (click)="goToPageAnnif(totalPagesAnnif)" [disabled]="currentPageAnnif === totalPagesAnnif" class="pagination-button">»</ion-button>
+      </div>
+      
+    </div>
+  </ion-col>
+</ion-card>
+
+<!-- Residents Returning Table -->
+<ion-card *ngIf="isDataLoaded && revenantData.length > 0" class="revenant-card my-4 shadow-lg">
+  <ion-card-header>
+    <ion-card-title class="bg-white text-dark text-center">{{ detailTitles[3] }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-col>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Chambre</th>
+            <th>Nom</th>
+            <th>Arrivée</th>
+            <th>Départ</th>
+            <th>Nb Fois</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of paginatedRevenantData">
+            <td>{{ item.chambre }}</td>
+            <td>{{ item.nom }}</td>
+            <td>{{ item.arrivee }}</td>
+            <td>{{ item.depart }}</td>
+            <td>{{ item.nbfois }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="pagination-container">
+        <!-- Go to First Page -->
+        <ion-button fill="clear" (click)="goToPageRevenent(1)" [disabled]="currentPageRevenent === 1" class="pagination-button">«</ion-button>
+        
+        <!-- Go to Previous Page -->
+        <ion-button fill="clear" (click)="prevPageRevenent()" [disabled]="currentPageRevenent === 1" class="pagination-button">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        
+        <!-- Page Numbers (Always 3 numbers) -->
+        <div class="page-number-container">
+          <ion-button *ngFor="let pageRevenent of pageNumbersRevenent"
+                      (click)="goToPageRevenent(pageRevenent)"
+                      [ngClass]="{'active-page': currentPageRevenent === pageRevenent}"
+                      fill="clear" class="pagination-button">
+            {{ pageRevenent }}
+          </ion-button>
+        </div>
+        
+        <!-- Go to Next Page -->
+        <ion-button fill="clear" (click)="nextPageRevenent()" [disabled]="currentPageRevenent === totalPagesRevenet" class="pagination-button">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+        
+        <!-- Go to Last Page -->
+        <ion-button fill="clear" (click)="goToPageRevenent(totalPagesRevenet)" [disabled]="currentPageRevenent === totalPagesRevenet" class="pagination-button">»</ion-button>
+      </div>
+    </div>
+  </ion-col>
+</ion-card>
+
+  <!-- Movement Table -->
+  <ion-card *ngIf="paginatedData.length > 0" class="data-card my-4 shadow-lg">
+    <ion-card-header>
+      <ion-card-title class="bg-primary text-white text-center">Mouvement de la Journée</ion-card-title>
+    </ion-card-header>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th style="font-size: 8px;">État</th>
+            <th style="font-size: 8px;">Chb</th>
+            <th style="font-size: 8px;">Nom</th>
+            <th style="font-size: 8px;">Arr</th>
+            <th style="font-size: 8px;">Dep</th>
+            <th style="font-size: 8px;">Temps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of paginatedData">
+            <td>
+              <span [ngStyle]="{'background-color': getStatusColor(client.etat), 'color': getTextColor(client.etat)}" class="status-badge">
+                {{ client.etat }}
+              </span>
+            </td>
+            <td style="font-size: 8px;">{{client.chb}}</td>
+            <td style="font-size: 8px;">{{ client.nom }}</td>
+            <td style="font-size: 8px;">{{ client.date_arr | date :'dd/MM' }}</td>
+            <td style="font-size: 8px;">{{ client.date_dep | date :'dd/MM' }}</td>
+            <td style="font-size: 8px;">{{ client.timeDiff }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="pagination-container">
+        <ion-button fill="clear" (click)="goToPageMouvement(1)" [disabled]="currentPage === 1" class="pagination-button">«</ion-button>
+        <ion-button fill="clear" (click)="prevPageMouvement()" [disabled]="currentPage === 1" class="pagination-button">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <div class="page-number-container">
+          <ion-button *ngFor="let page of pageNumbers" (click)="goToPageMouvement(page)" [ngClass]="{'active-page': currentPage === page}" fill="clear" class="pagination-button">
+            {{ page }}
+          </ion-button>
+        </div>
+        <ion-button fill="clear" (click)="nextPageMouvement()" [disabled]="currentPage === totalPages" class="pagination-button">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" (click)="goToPageMouvement(totalPages)" [disabled]="currentPage === totalPages" class="pagination-button">»</ion-button>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

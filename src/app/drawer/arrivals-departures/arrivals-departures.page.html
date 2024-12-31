@@ -1,0 +1,42 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Arrivals & Departures</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Arrivals List -->
+  <ion-card>
+    <ion-card-header color="light">
+      <ion-card-title>Listes des Arrivées Prévues</ion-card-title>
+    </ion-card-header>
+    <ion-list lines="full" class="arrival-list">
+      <ion-item *ngFor="let arrival of arrivals">
+        <ion-label>
+          <h2>{{ arrival.name }}</h2>
+          <p>Arrival Date: {{ arrival.date | date }}</p>
+        </ion-label>
+        <ion-icon slot="end" name="airplane"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <!-- Departures List -->
+  <ion-card>
+    <ion-card-header color="light">
+      <ion-card-title>Listes des Départs Prévus</ion-card-title>
+    </ion-card-header>
+    <ion-list lines="full" class="departure-list">
+      <ion-item *ngFor="let departure of departures">
+        <ion-label>
+          <h2>{{ departure.name }}</h2>
+          <p>Departure Date: {{ departure.date | date }}</p>
+        </ion-label>
+        <ion-icon slot="end" name="train"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,50 @@
+
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title></ion-title>
+    <ion-buttons slot="end" style="display: flex; justify-content: center; align-items: center;">
+      <p style="display: flex; justify-content: center; align-items: center; color: black; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; margin: 6%">{{ currentDate | date:'dd/MM/yyyy' }}</p>
+      <ion-button (click)="RefreshProcedure()" class="refrech-button"><img src="../../../assets/icon/arrows-rotate-solid.svg" alt="refresh" /></ion-button>
+    </ion-buttons>
+
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="returnToMainTable()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title style="font-size: 13px;" class="ion-text-center">Point de vente: {{ pointDeVenteName }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+  <div class="table-container" style="overflow-x: auto;">
+    <ion-card>
+      <table>
+        <thead style="background-color: black; color: white; font-size: 12px;">
+          <tr style="background-color: black; color: white; font-size: 12px;">
+            <th style="background-color: black; color: white; font-size: 12px;text-align: center;">Libellé</th>
+            <th style="background-color: black; color: white; font-size: 12px;text-align: center;">Qte</th>
+            <th style="background-color: black; color: white; font-size: 12px;text-align: center;">Prix Unitaire (dt)</th>
+            <th style="background-color: black; color: white; font-size: 12px;text-align: center;">CA (dt)</th>
+            <th style="background-color: black; color: white; font-size: 12px;text-align: center;">T.O (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of selectedRowData">
+            <td style="font-size: 14px;text-align: center;">{{ product.labelle }}</td>
+            <td style="font-size: 14px;text-align: center;">{{ product.qte }}</td>
+            <td style="font-size: 14px;text-align: center;">{{ product.prix }}</td>
+            <td style="font-size: 14px;text-align: center;">{{ product.ca }}</td>
+            <td style="font-size: 14px;text-align: center;">{{ product.calculatedValue.toFixed(2) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-card>
+  </div>
+  <div style="margin-top: 20px;">
+    <h3 class="ion-text-center">Meilleur Article vendu</h3>
+    <canvas id ="detelchart">
+    </canvas>
+  </div>
+</ion-content>

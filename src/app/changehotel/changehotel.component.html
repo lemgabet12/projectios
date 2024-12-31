@@ -1,0 +1,51 @@
+
+<div class="hotel-select-container">
+  <form class="hotel-form">
+    <label for="hotelSelect" class="form-label">Select Hotel:</label>
+    <select
+      id="hotelSelect"
+      name="selectedHotel"
+      [(ngModel)]="selectedHotel"
+      (ngModelChange)="updateApiDetails()"
+      class="form-select"
+      required
+    >
+      <option *ngFor="let hotel of filteredHotels" [ngValue]="hotel">
+        {{ hotel.name }}
+      </option>
+    </select>
+
+    <div class="selected-hotel-info mt-3" *ngIf="selectedHotel">
+      <h5>Hotel sélectionné :</h5>
+      <p><strong>Name:</strong> {{ selectedHotel.name }}</p>
+      <p><strong>Port:</strong> {{ selectedHotel.hotelport }}</p>
+      <p><strong>URL:</strong> {{ selectedHotel.urlpub }}</p>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-primary mt-2"
+      [disabled]="!selectedHotel"
+      (click)="onSave()"
+    >
+      Enregistrer
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary mt-2"
+      (click)="gotosetting()"
+    >
+      Retourner à Drawer
+    </button>
+
+    <!-- Success message after saving -->
+    <div *ngIf="isSaved" class="alert alert-success mt-3">
+      Changement effectué!
+    </div>
+
+    <!-- Loading spinner while saving -->
+    <div *ngIf="isSaving" class="spinner-border text-primary mt-3" role="status">
+      <span class="visually-hidden">Saving...</span>
+    </div>
+  </form>
+</div>

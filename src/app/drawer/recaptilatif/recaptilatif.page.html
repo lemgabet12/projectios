@@ -1,0 +1,81 @@
+<ion-header class="ion-no-border" style="margin-top: 5%;">
+  <ion-toolbar>
+    <ion-title class="text-center" style="font-size:20px; margin: 0 auto;">Xlia Mobile</ion-title>
+    <ion-buttons slot="end" style="display: flex; justify-content: center; align-items: center;">
+      <p class="mb-0" style="display: flex; justify-content: center; align-items: center; color: black; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; margin: 6%">{{currentDate | date:'dd/MM/yyyy'}}</p>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="RefreshProcedure()" class="refrech-button"><img src="../../../assets/icon/arrows-rotate-solid.svg" alt="refresh" /></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+  <div style="text-align: center; margin: 4px;">
+   
+    <h2 class="table-title text-center bg-white text-dark mt-3" style="font-size: 20px;color: black">Sélectionner la période :</h2>
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <!-- Start Date Column -->
+      <div style="margin-right: 3px; display: flex; flex-direction: column; align-items: center;">
+        <ion-icon name="calendar" class="calendar-icon" (click)="toggleStartDatePicker()"></ion-icon>
+        <ion-input type="text" class="input-sm" placeholder="Start Date" readonly [value]="formtdstart"></ion-input>
+        <ion-datetime *ngIf="isStartDatePickerOpen" displayFormat="dd/MM/yyyy" [(ngModel)]="startDate" (ionChange)="fetchData()"></ion-datetime>
+      </div>
+      <div style="margin-right: 3px;">
+        <span style="line-height: 35px; font-size: 16px;">Au</span>
+      </div>
+      <!-- End Date Column -->
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <ion-icon name="calendar" class="calendar-icon" (click)="toggleEndDatePicker()"></ion-icon>
+        <ion-input type="text" class="input-sm" placeholder="End Date" readonly [value]="formtdend"></ion-input>
+        <ion-datetime *ngIf="isEndDatePickerOpen" displayFormat="dd/MM/yyyy" [(ngModel)]="endDate" (ionChange)="fetchData()"></ion-datetime>
+      </div>
+    </div>
+
+
+    <ion-grid class="data-grid">
+      <h2 sclass="table-title text-center bg-white text-dark mt-3" style="font-size: 20px;">Points de vente</h2>
+      <table style="width: 100%; color: black; overflow-x: auto;">
+        <thead>
+          <tr>
+            <th style="text-align: center; font-size: 10px;">Labelle</th>
+            <th colspan="5" style="text-align: center; font-size: 10px;">DT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="data-header">
+            <th style="font-size: 10px; color: black;">P.V</th>
+            <th style="font-size: 10px; color: black;">ESPE</th>
+            <th style="font-size: 10px; color: black;">CHEQ</th>
+            <th style="font-size: 10px; color: black;">CART</th>
+            <th style="font-size: 10px; color: black;">AUT</th>
+            <th style="font-size: 10px; color: black;">CA</th>
+          </tr>
+          <tr *ngFor="let row of rows" (click)="openRowDetails(row.caisseid, row.labelle, row.TO)">
+            <td style="font-size: 10px; text-align: left;">{{ row['labelle'] }}</td>
+            <td style="font-size: 10px; text-align: right;">{{ row['integervalue4'] === 0 ? null : row['integervalue4'] }}</td>
+            <td style="font-size: 10px; text-align: right;">{{ row['integervalue3'] === 0 ? null : row['integervalue3'] }}</td>
+            <td style="font-size: 10px; text-align: right;">{{ row['integervalue2'] === 0 ? null : row['integervalue2'] }}</td>
+            <td style="font-size: 10px; text-align: right;">{{ row['integervalue1'] === 0 ? null : row['integervalue1'] }}</td>
+            <td style="font-size: 10px; text-align: right;">{{ row['TO'] === 0 ? null : row['TO'] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-grid>
+  </div>
+
+  <div style="overflow-x: auto; text-align: center;">
+
+    <ion-card style="overflow-x: auto;">
+      <canvas style="overflow-x: auto;height: 200px;" id="chart1"></canvas>
+    </ion-card>
+  </div>
+
+  <h3 style="text-align: center; font-size: 20px;"></h3>
+  <div style="overflow-x: auto; text-align: center;">
+    <ion-card style="overflow-x: auto;">
+      <canvas style="overflow-x: auto;height: 200px;" id="chart2"></canvas>
+    </ion-card>
+  </div>
+</ion-content>

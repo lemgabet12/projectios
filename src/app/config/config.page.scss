@@ -1,0 +1,124 @@
+/* General Styling */
+ion-header {
+  --background: linear-gradient(45deg, #0077ff, #00ccff); /* Gradient header for modern look */
+  color: #ffffff;
+}
+
+ion-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Content Styling */
+ion-content {
+  --background: #f4f4f4; /* Light grey background for content area */
+}
+
+.config-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.config-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0077ff;
+}
+
+/* Form Items Styling */
+ion-item {
+  --border-color: #0077ff;
+  --highlight-color-focused: #00ccff;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+ion-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+
+ion-input {
+  font-size: 16px;
+  color: #333;
+}
+
+ion-icon {
+  font-size: 18px;
+  color: #0077ff;
+}
+
+/* Input Validation */
+.invalid-input {
+  border: 2px solid #ff5252;
+  border-radius: 6px;
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+}
+
+.error-message {
+  color: #ff5252;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  padding-left: 8px;
+}
+
+/* Button Styling */
+.submit-button {
+  --background: #0077ff;
+  --background-hover: #005bb5;
+  --color: #ffffff;
+  --border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.submit-button:disabled {
+  --background: #b3d9ff;
+  cursor: not-allowed;
+}
+
+/* Toast Styling */
+ion-toast {
+  --background: #0077ff;
+  --color: #ffffff;
+  border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .config-card {
+    margin: 10px;
+    padding: 16px;
+  }
+
+  .config-title {
+    font-size: 16px;
+  }
+
+  ion-label, ion-input {
+    font-size: 14px;
+  }
+
+  .submit-button {
+    font-size: 14px;
+  }
+}

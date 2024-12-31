@@ -1,0 +1,194 @@
+ion-toolbar {
+  --background: white;
+
+  @media (prefers-color-scheme: dark) {
+    --background: var(--ion-background-color);
+  }
+}
+
+.md ion-toolbar {
+  --padding-top: var(--status-bar-height);
+}
+
+ion-title {
+  font-size: 20px;
+  font-family: WorkSans-Bold;
+  color: var(--color-darkText);
+}
+
+ion-title.md {
+  text-align: center;
+  margin-left: 48px; // menu icon space
+}
+
+ion-item {
+  --padding-end: 0px;
+  --inner-padding-end: 0px;
+ /* --border-radius: 4px;*/
+
+  ion-img {
+    aspect-ratio: 1.5;
+    object-fit: cover;
+  }
+}
+
+.material-icons.darkgrey {
+  color: var(--color-darkgrey);
+}
+ion-toolbar {
+  --background: rgb(252, 252, 252);
+
+  @media (prefers-color-scheme: dark) {
+    --background: var(--ion-background-color);
+  }
+}
+ion-toolbar {
+  position: fixed;
+ /* Adjust the z-index as needed */
+}
+ion-list {
+  /* Add padding or margin to the content to prevent it from being hidden under the fixed header */
+  padding-top: 56px; /* Adjust the value based on your header's height */
+}
+.md ion-toolbar {
+  --padding-top: var(--status-bar-height);
+}
+
+ion-title {
+  font-size: 22px;
+  font-family: WorkSans-Bold;
+  color: var(--color-darkText);
+}
+
+ion-title.md {
+  margin-left: 48px; // menu icon space
+}
+ ion-col {
+  border: 1px black solid  ;
+
+}
+
+ion-item {
+  --padding-end: 0px;
+  --inner-padding-end: 0px;
+ /* --border-radius: 4px;*/
+
+  ion-img {
+    aspect-ratio: 1.5;
+    object-fit: cover;
+  }
+  .sc1
+  {
+    display: flex;
+    flex-wrap: nowrap;
+
+  }
+  ion-row {
+    border: 1px solid black;
+  }
+}
+.hidden {
+  display: none;
+}
+.Pax
+{
+  color: green;
+
+}
+.Chambre
+ {
+  color: red;
+ }
+
+.material-icons.darkgrey {
+  color: var(--color-darkgrey);
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  background-color: rgba(255, 255, 255, 0.8); /* Adjust the opacity as needed */
+
+}
+/* Add this in your global styles or in the component's styles */
+.refrech-button {
+  --background: white;
+}
+
+
+
+th, td {
+  text-align: left;
+  padding: 4px;
+  border: 1px solid #ddd;
+  font-size: 11px; /* Add borders to cells */
+
+}
+th{
+  background-color: #f2f2f2;
+  font-size: 9px; /* Add a background color for headers */
+}
+
+.table-title {
+  text-align: center;
+  margin-top: 20px; /* Adjust the margin as needed */
+  font-size: 1.5em; /* Adjust the font size as needed */
+  color: #fff; /* Set the color of the title text */
+}
+.table-description {
+  text-align: left;
+  font-size: 1em; /* Adjust the font size as needed */
+  color: #eee; /* Set the color of the description text */
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+.night-mode ion-toolbar {
+  background-color: #333; // Dark background color for toolbar
+  color: #fff; // Light text color for toolbar
+}
+
+.night-mode .background {
+  background-color: #222; // Dark background color for content area
+}
+
+.night-mode h1 {
+  color: #fff; // Light text color for headings
+}
+
+.night-mode table {
+  color: #fff; // Light text color for table content
+}
+
+.night-mode th {
+  background-color: #444; // Dark background color for table headers
+}
+
+.night-mode .chart-container {
+  background-color: #333; // Dark background color for chart container
+}
+
+.night-mode canvas {
+  border: 1px solid #fff; // Light border color for canvas
+}
+
+/************************************************/
+@media only screen and (max-width: 1024px) {
+  .tablette {
+
+    margin-top: 10%;
+  }
+  }
+  @media only screen and (max-width: 768px) {
+    .tablette {
+      margin-top: 19%;
+    }
+  }
+  .special-row-2 {
+    background-color: lightblue; /* Change to your desired color */
+  }
+
+  .special-row-4 {
+    background-color: lightgreen; /* Change to your desired color */
+  }

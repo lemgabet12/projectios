@@ -1,0 +1,120 @@
+<ion-header class="ion-no-border" style="margin-top: 5%;">
+  <ion-toolbar>
+    <ion-title style="text-align: center;"></ion-title>
+    
+    <ion-buttons slot="end" style="display: flex; justify-content: center; align-items: center;">
+      <p
+        style="display: flex; justify-content: center; align-items: center; color: black; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; margin: 6%">
+        {{ currentDate | date : 'dd/MM/yyyy' }}
+      </p>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="refreshProcedure()" class="refresh-button">
+        <img loading="lazy" src="../../../assets/icon/arrows-rotate-solid.svg" alt="refresh" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="night-mode">
+  <!-- Loading Spinner (circle) with Text -->
+  <ion-spinner *ngIf="isLoading" name="crescent"><h6>actualiser</h6></ion-spinner>
+
+  <!-- Refresher for Pull-to-Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="bubbles"
+      refreshingText="Actualiser...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Content Grid Section (only shown when isLoading is false) -->
+  <div *ngIf="!isLoading">
+    <ion-grid>
+      <!-- Section: Pie Chart -->
+      <ion-row>
+        <ion-col size="12" size-md="6" offset-md="3">
+          <div class="section">
+            <h1 class="table-title">Prévision Chiffre d'affaire par agence - {{ currentDate | date: 'dd/MM/yyyy' }}</h1>
+            <ion-card>
+              <div class="chart-container">
+                <canvas id="pieChart12"></canvas>
+              </div>
+            </ion-card>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <!-- Section: Chiffre d'affaire - Prévisionnel -->
+      <ion-row>
+        <ion-col size="12" size-md="6" offset-md="3">
+          <div class="section">
+            <h1 class="table-title">Chiffre d'affaire par agence / prévisionnel</h1>
+            <h3><p class="table-subtitle">Période: {{ currentDate | date: 'dd/MM/yyyy' }} au {{ nextMonth | date: 'dd/MM/yyyy' }}</p></h3>
+            <div class="table-container">
+              <ion-grid class="data-grid">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Nom</th>
+                      <th>C.A DT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let mois of moiss">
+                      <tr *ngIf="mois['lib_agence'] !== 0" >
+                        <td>{{ mois['lib_agence'] }}</td>
+                        <td>{{ mois['sum_prix'] }}</td>
+                      </tr>
+                    </ng-container>
+                    <tr>
+                      <td><strong>Total</strong></td>
+                      <td><strong>{{ totalPrixMoiss }}</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ion-grid>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <!-- Section: Chiffre d'affaire - Réalisé -->
+      <ion-row>
+        <ion-col size="12" size-md="6" offset-md="3">
+          <div class="section">
+            <h1 class="table-title">Chiffre d'affaire par agence / réalisé</h1>
+            <h3><p class="table-subtitle">Période: {{ previousMonth | date: 'dd/MM/yyyy' }} au {{ yesterday | date: 'dd/MM/yyyy' }}</p></h3>
+            <div class="table-container">
+              <ion-grid class="data-grid">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Nom</th>
+                      <th>C.A DT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let mois of muisss">
+                      <tr *ngIf="mois['lib_agence'] !== 0" (>
+                        <td>{{ mois['lib_agence'] }}</td>
+                        <td>{{ mois['sum_prix'] }}</td>
+                      </tr>
+                    </ng-container>
+                    <tr>
+                      <td><strong>Total</strong></td>
+                      <td><strong>{{ totalPrixMuisss }}</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ion-grid>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

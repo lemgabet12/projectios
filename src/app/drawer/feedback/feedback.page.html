@@ -1,0 +1,61 @@
+<ion-header class="ion-no-border" style="margin-top: 5%;">
+  <ion-toolbar>
+    <ion-title style="text-align: center;"></ion-title>
+    
+    <ion-buttons slot="end" style="display: flex; justify-content: center; align-items: center;">
+      <!-- Decrement Button (Day -1) -->
+      <ion-button style="font-size: 7px;"  (click)="decrementDate()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+
+      <p
+        style="display: flex; justify-content: center; align-items: center; color: black; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; margin: 6%">
+        {{ currentDate | date : 'dd/MM/yyyy' }}
+      </p>
+
+      <!-- Increment Button (Day +1) -->
+      <ion-button style="font-size: 7px;" (click)="incrementDate()" >
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+    <ion-buttons slot="end">
+      <ion-button (click)="RefreshProcedure()" class="refresh-button">
+        <img loading="lazy" src="../../../assets/icon/arrows-rotate-solid.svg" alt="refresh" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="night-mode">
+  
+  <ion-refresher style="margin-top: 15%;" slot="fixed" (ionRefresh)="doRefresh($event)"> <ion-refresher-content slot="fixed" pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="bubbles" refreshingText="Refreshing..."> </ion-refresher-content> </ion-refresher>
+
+  <ion-card style="overflow-x: auto; margin-top: 14%;"></ion-card>
+  
+  <ion-grid class="tablette" style="overflow-x: auto">
+    <ion-row style="overflow-x: auto">
+      <ion-col style="opacity: 1; margin-top: 7%; overflow-x: auto">
+        <div style="overflow-x: auto;">
+          <h1 class="bg-white text-center text-dark" style="font-size: 20px;">Chiffre d'affaire PV</h1>
+          <div style="background-color: white; color: black; text-align: center; margin: 3%;overflow-x: auto">
+            <ion-card style="overflow-x: auto">
+              <canvas style="overflow-x: auto" width="200px" height="200px" id="myCh12"></canvas>
+            </ion-card>
+          </div>
+          <h1 class="bg-white text-center text-dark" style="font-size: 20px;text-align: center;color: black;">Chiffre d'affaire global</h1>
+          <h2 class="bg-white text-center text-dark" style="font-size: 20px;text-align: center;color: black">Cumul du mois</h2>
+          <div style="background-color: white;overflow-x: auto;">
+            <canvas id="pieChart8" style="margin-top: 3%; background-color: white;overflow-x: auto;"></canvas>
+          </div>
+          
+          <h2 class="bg-white text-center text-dark" style="font-size: 20px;text-align: center;color: black">Cumul de l'année</h2>
+          <div style="background-color: white;overflow-x: auto;">
+            <canvas id="pieChart9" style="margin-top: 3%; margin-bottom: 10%; background-color: white;overflow-x: auto;"></canvas>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

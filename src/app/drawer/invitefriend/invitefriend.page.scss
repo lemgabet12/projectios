@@ -1,0 +1,147 @@
+
+.center-title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  left: 0;
+  top: 0;
+  height: 100%;
+  align-items: center;
+  color: #080808;
+}
+
+.date-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.date-text {
+  color: #343a40;
+  font-family: 'Lucida Sans', sans-serif;
+  margin: 0;
+}
+
+.refresh-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.section {
+  margin-bottom: 3%;
+}
+
+.table-title {
+  font-size: 1.25rem;
+  color: #343a40;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.table-subtitle {
+  font-size: 1rem;
+  color: #343a40;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.table-container {
+  background-color: #ffffff;
+  color: #343a40;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  text-align: center;
+  padding: 0.75rem;
+  border: 1px solid #dee2e6;
+}
+
+.table th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.chart-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spinner-container {
+  position: relative;
+  z-index: 1000;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .table-title {
+    font-size: 1.1rem;
+  }
+  .table-subtitle {
+    font-size: 0.9rem;
+  }
+  .date-text {
+    font-size: 0.8rem;
+  }
+  .refresh-button img {
+    width: 20px;
+    height: 20px;
+  }
+  .chart-container {
+    width: 90%;
+    height: auto;
+  }
+  #pieChart12 {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-title {
+    font-size: 1rem;
+  }
+  .table-subtitle {
+    font-size: 0.85rem;
+  }
+  .date-text {
+    font-size: 0.75rem;
+  }
+  .chart-container {
+    width: 100%;
+    padding: 1rem;
+  }
+  #pieChart12 {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+.text-dark {
+  color: black;
+}
+

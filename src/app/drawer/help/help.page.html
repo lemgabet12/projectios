@@ -1,0 +1,90 @@
+<ion-header class="ion-no-border" style="margin-top: 5%;">
+  <ion-toolbar>
+    <ion-title style="text-align: center;"></ion-title>
+    
+    <ion-buttons slot="end" style="display: flex; justify-content: center; align-items: center;">
+
+
+      <p
+        style="display: flex; justify-content: center; align-items: center; color: black; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; margin: 6%">
+        {{ currentDate | date : 'dd/MM/yyyy' }}
+      </p>
+
+      <!-- Increment Button (Day +1) -->
+
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="RefreshProcedure()" class="refresh-button">
+        <img loading="lazy" src="../../../assets/icon/arrows-rotate-solid.svg" alt="refresh" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+  <ion-spinner *ngIf="isLoading" name="crescent"><h6>actualiser</h6></ion-spinner>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)"> 
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="bubbles" refreshingText="Actualiser..."> 
+    </ion-refresher-content> 
+  </ion-refresher>
+  <ion-grid class="container">
+    <!-- First Chart Section -->
+    <h1 class="bg-white text-center text-dark">État Global</h1>
+    <ion-row>
+      <ion-col size="12" size-md="12">
+        <ion-card>
+          <div class="chart-container">
+            <canvas id="occupchart2"></canvas>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!-- Second Chart Section -->
+    <ion-row>
+      <ion-col size="12" size-md="6" offset-md="3">
+        <ion-card>
+          <div class="chart-container">
+            <canvas id="myCh5"></canvas>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!-- Third Chart Section (Pie Chart) -->
+    <h1 class="bg-white text-center text-dark">Catégories Disponibles</h1>
+    <ion-row class="bg-white text-center text-dark">
+      <ion-col size="12" size-md="12"> <!-- Increase the column size on medium+ screens -->
+        <ion-card>
+          <div class="large-chart-container">
+            <canvas style="  width: 150px; height: 150px;" id="pieChart4"></canvas>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!-- Details Section with Additional Charts -->
+
+    <ion-row class="bg-white text-center text-dark" *ngIf="openDetailsChart">
+      <ion-col size="12" size-md="12" *ngIf="showDetailsChart">
+        <ion-card>
+          <div class="chart-container">
+            <canvas style="height: 200px;" id="detailsChart6"></canvas>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!-- Fourth Chart Section -->
+    <ion-row class="bg-white text-center text-dark">
+      <ion-col size="12" size-md="12">
+        <ion-card>
+          <div class="chart-container">
+            <canvas id="MyChartch1"></canvas>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

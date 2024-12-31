@@ -1,0 +1,41 @@
+
+ion-card {
+    margin: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+  }
+  
+  ion-card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+  }
+  
+  .arrival-list ion-item, .departure-list ion-item {
+    border-radius: 8px;
+    margin: 4px 0;
+    --background: #f9f9f9;
+  }
+  
+  ion-item h2 {
+    font-size: 1rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  ion-item p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+  }
+  
+  ion-icon {
+    color: #3880ff;
+    font-size: 1.2rem;
+  }
+  
+  
+  
+  
+  

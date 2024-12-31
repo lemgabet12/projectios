@@ -1,0 +1,68 @@
+<ion-header class="ion-no-border" style="margin-top: 5%;">
+  <ion-toolbar>
+    <ion-title class="text-center" style="font-size: 20px; margin: 0 auto;">Xlia Mobile</ion-title>
+    <ion-buttons slot="end">
+      <p class="current-date">{{currentDate | date:'dd/MM/yyyy'}}</p>
+      <ion-button class="refresh-button">
+        <ion-icon name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleView('grid')" [ngClass]="{'active': isGridView}">
+        <ion-icon name="grid-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="toggleView('list')" [ngClass]="{'active': !isGridView}">
+        <ion-icon name="list-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="dashboard-header">
+  <ion-grid *ngIf="isGridView">
+    <ion-row>
+      <ion-col
+        *ngFor="let card of cards; let i = index"
+        size="12" size-sm="6" size-md="4" size-lg="3" size-xl="3"
+        [ngClass]="i % 2 === 0 ? 'slide-in-left' : 'slide-in-right'">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div [ngClass]="['flip-card-front', 'widget', card.color]">
+              <ion-row>
+                <ion-col size="4">
+                  <ion-icon [name]="card.icon" class="icon-large"></ion-icon>
+                </ion-col>
+                <ion-col size="8" class="text-right">
+                  <span class="card-title">{{ card.title }}</span>
+                  <h2 class="font-bold">{{ card.value }} <small>{{ card.currency }}</small></h2>
+                </ion-col>
+              </ion-row>
+            </div>
+            <div *ngIf="card.monthlyTitle" [ngClass]="['flip-card-back', 'widget', card.color]">
+              <ion-row>
+                <ion-col size="4">
+                  <ion-icon [name]="card.icon" class="icon-large"></ion-icon>
+                </ion-col>
+                <ion-col size="8" class="text-right">
+                  <span>{{ card.monthlyTitle }}</span>
+                  <h2 class="font-bold">{{ card.monthlyValue }} <small>{{ card.currency }}</small></h2>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list *ngIf="!isGridView">
+    <ion-item *ngFor="let card of cards" class="list-card">
+      <ion-icon [name]="card.icon" class="icon-large"></ion-icon>
+      <ion-label>
+        <h2>{{ card.title }}</h2>
+        <p>{{ card.value }} <small>{{ card.currency }}</small></p>
+        <p *ngIf="card.monthlyTitle">{{ card.monthlyTitle }}: {{ card.monthlyValue }} <small>{{ card.currency }}</small></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">XliaMob</string>
+    <string name="title_activity_main">XliaMob</string>
+    <string name="package_name">io.ionic.templates</string>
+    <string name="custom_url_scheme">io.ionic.templates</string>
+</resources>

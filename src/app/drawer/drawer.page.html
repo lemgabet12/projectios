@@ -1,0 +1,99 @@
+<div style="margin-top: 5%;">
+  <ion-split-pane contentId="main-content">
+    <!-- Your existing ion-menu setup -->
+    <ion-menu class="menu-type-reveal" style="--width: {{drawerWidth}}px" side="start" menuId="main-menu"
+      contentId="main-content" type="my-reveal" [maxEdgeStart]="platform.width()">
+      <!-- Header with user information -->
+      <div class="headerToolbar">
+        <ion-avatar class="userImage">
+          <img [src]="getsiglehotel" alt="Hotel Image" *ngIf="getsiglehotel" />
+        </ion-avatar>
+
+        <div>
+          <h1 style="font-size: 15px;">{{ nom }}</h1>
+        </div>
+
+      </div>
+      <div class="divider"></div>
+
+      <!-- Menu content -->
+      <ion-content style="overflow-x: auto">
+        <ion-list class="ion-no-padding">
+          <!-- Iterate over your appPages for navigation items -->
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item class="drawerItem" lines="none" detail="false" routerDirection="root"
+              [routerLink]="p.url ? [p.url] : undefined" (click)="onDrawerNavigate(p)">
+              <ion-item class="drawerInnerItem" [style.--width]="rowWidth + 'px'"
+                [style.--background]="activeTab === p.name ? 'rgba(33, 150, 243, 0.2)' : 'transparent'" lines="none">
+              </ion-item>
+              <i *ngIf="!p.isAsset"
+                [style.color]="activeTab === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'"
+                class="material-icons icon-margin">
+                {{ p.icon }}
+              </i>
+              <ion-img *ngIf="p.isAsset" style="width: 24px; height: 24px" class="icon-margin"
+                [ngClass]="{'imgTintBlue': activeTab === p.name, 'imgTintBlack': activeTab !== p.name}"
+                src="assets/home/supportIcon.png" [alt]="p.name"></ion-img>
+              <ion-label style="font-weight: 500; font-size: 16px; margin-left: 8px"
+                [style.color]="activeTab === p.name ? 'rgb(33, 150, 243)' : 'var(--color-nearlyBlack)'">{{ p.name }}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-popover #topMenuPopover>
+            <ion-list style="overflow-x: auto">
+              <ion-item button (click)="openModifierPasswordPage()">
+                <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+                Modifier Mot De Passe
+              </ion-item>
+              <ion-item style="overflow-x: auto" button (click)="openModifierEmailPage()">
+                <ion-icon name="mail-outline" slot="start"></ion-icon>
+                Modifier Email
+              </ion-item>
+            </ion-list>
+          </ion-popover>
+
+
+        </ion-list>
+      </ion-content>
+      <div class="divider"></div>
+      <ion-footer class="ion-no-border">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="goToProfile()">
+              <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button>
+              <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+      <ion-footer class="ion-no-border">
+        <ion-toolbar class="ion-no-padding">
+          <ion-item button="true" detail="false" lines="none" (click)="logout()">
+            <ion-label class="sign-out-text">Se Déconnecter</ion-label>
+            <i class="material-icons colorRed">power_settings_new</i>
+          </ion-item>
+        </ion-toolbar>
+      </ion-footer>
+
+    </ion-menu>
+
+    <!-- Your main content router outlet -->
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+
+  <!-- Menu icon -->
+  <div style="position: absolute" class="menu menu--back5 ion-activatable" (click)="onMenuClick()"
+    [hidden]="isSplitPane" #menuIcon>
+    <div class="menu__icon">
+      <div class="menu__line menu__line--1"></div>
+      <div class="menu__line menu__line--2"></div>
+      <div class="menu__line menu__line--3"></div>
+    </div>
+    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+  </div>
+</div>

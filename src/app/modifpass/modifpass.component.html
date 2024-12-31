@@ -1,0 +1,27 @@
+
+<div class="reset-password-container">
+  <form class="reset-password-form" (ngSubmit)="resetPassword()">
+    <div>
+      <label for="currentPassword">Current Password:</label>
+      <input type="password" id="currentPassword" name="currentPassword" ngModel required>
+    </div>
+    <div>
+      <label for="newPassword">nouveau Mot De Passe:</label>
+      <input type="password" id="newPassword" name="newPassword" ngModel required>
+    </div>
+    <div>
+      <label for="confirmPassword">Confirme nouveau Mot De Passe:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" ngModel required>
+      <div *ngIf="resetPasswordForm.controls['confirmPassword'].errors?.['required'] && resetPasswordForm.controls['confirmPassword'].touched" class="text-danger">
+        Confirm Mot De Passe est vite.
+      </div>
+      <div *ngIf="newPassword !== confirmPassword && resetPasswordForm.controls['confirmPassword'].dirty && resetPasswordForm.controls['confirmPassword'].touched" class="text-danger">
+        Mot des Passes ne pas le même.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Reset Mot De Passe</button>
+    <button type="submit" class="btn btn-primary btn-block" (click)="routlogin()">Se connecter</button>
+  </form>
+</div>
+
+

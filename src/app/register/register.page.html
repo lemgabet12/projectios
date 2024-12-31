@@ -1,0 +1,87 @@
+<ion-content class="register-background">
+  <div class="ion-padding form-container">
+    <div class="ion-text-center">
+      <h2>Register</h2>
+    </div>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
+      <div *ngIf="errorMessage" class="ion-padding alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Nom Field -->
+      <ion-item lines="none" class="custom-item" [class.error]="nom.invalid && (nom.dirty || nom.touched)">
+        <ion-label position="floating">Nom</ion-label>
+        <ion-input type="text" name="nom" required [(ngModel)]="userData.nom" #nom="ngModel"></ion-input>
+        <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger">
+          <div *ngIf="nom.errors?.['required']">Nom est incorrect.</div>
+        </div>
+      </ion-item>
+
+      <!-- Prenom Field -->
+      <ion-item lines="none" class="custom-item" [class.error]="prenom.invalid && (prenom.dirty || prenom.touched)">
+        <ion-label position="floating">Prenom</ion-label>
+        <ion-input type="text" name="prenom" required [(ngModel)]="userData.prenom" #prenom="ngModel"></ion-input>
+        <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="text-danger">
+          <div *ngIf="prenom.errors?.['required']">Prenom est incorrect.</div>
+        </div>
+      </ion-item>
+
+      <!-- Role Field -->
+      <ion-item lines="none" class="custom-item" [class.error]="role.invalid && (role.dirty || role.touched)">
+        <ion-label position="floating">Role</ion-label>
+        <ion-select name="role" interface="action-sheet" required [(ngModel)]="userData.role" #role="ngModel">
+          <ion-select-option *ngFor="let role of roles" [value]="role.name">{{ role.name }}</ion-select-option>
+        </ion-select>
+        <div *ngIf="role.invalid && (role.dirty || role.touched)" class="text-danger">
+          <div *ngIf="role.errors?.['required']">Role est incorrect.</div>
+        </div>
+      </ion-item>
+
+      <!-- Code Pays Field -->
+      <ion-item lines="none" class="custom-item" [class.error]="codCity.invalid && (codCity.dirty || codCity.touched)">
+        <ion-label position="floating">Code Pays</ion-label>
+        <ion-select name="codCity" interface="action-sheet" required [(ngModel)]="userData.cityName" #codCity="ngModel">
+          <ion-select-option *ngFor="let city of codCities" [value]="city.cityName">{{ city.cityName }}</ion-select-option>
+        </ion-select>
+        <div *ngIf="codCity.invalid && (codCity.dirty || codCity.touched)" class="text-danger">
+          <div *ngIf="codCity.errors?.['required']">Code Pays est incorrect.</div>
+        </div>
+      </ion-item>
+
+      <!-- Telephone Field -->
+      <ion-item lines="none" class="custom-item" [class.error]="telephone.invalid && (telephone.dirty || telephone.touched)">
+        <ion-label position="floating">Telephone</ion-label>
+        <ion-input type="tel" name="telephone" required [(ngModel)]="userData.telephone" #telephone="ngModel" pattern="[0-9]*" maxlength="8"></ion-input>
+        <div *ngIf="telephone.invalid && (telephone.dirty || telephone.touched)" class="text-danger">
+          <div *ngIf="telephone.errors?.['required']">Telephone est incorrect.</div>
+          <div *ngIf="telephone.errors?.['pattern']">Telephone doit être numeric.</div>
+          <div *ngIf="telephone.errors?.['maxlength']">Telephone doit être 8 numéro.</div>
+        </div>
+      </ion-item>
+
+      <!-- Email Field -->
+      <ion-item lines="none" class="custom-item" [class.error]="email.invalid && (email.dirty || email.touched)">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" name="email" required [(ngModel)]="userData.email" #email="ngModel" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"></ion-input>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+          <div *ngIf="email.errors?.['required']">Email est incorrect.</div>
+          <div *ngIf="email.errors?.['pattern']">Invalid email format.</div>
+        </div>
+      </ion-item>
+
+      <!-- Hotel Name Field -->
+      <ion-item lines="none" class="custom-item" [class.error]="nomdehotel.invalid && (nomdehotel.dirty || nomdehotel.touched)">
+        <ion-label position="floating">Nom de hotel</ion-label>
+        <ion-input type="text" name="nomdehotel" required [(ngModel)]="userData.nomdehotel" #nomdehotel="ngModel"></ion-input>
+        <div *ngIf="nomdehotel.invalid && (nomdehotel.dirty || nomdehotel.touched)" class="text-danger">
+          <div *ngIf="nomdehotel.errors?.['required']">Nom de hotel est incorrect.</div>
+        </div>
+      </ion-item>
+
+      <div class="ion-text-center">
+        <ion-button type="submit" expand="block" class="register-button">Register</ion-button>
+        <ion-button expand="block" fill="outline" (click)="routlogin()" class="login-button">Connecter</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

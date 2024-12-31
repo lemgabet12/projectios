@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border"style="margin-top: 5%;">
+  <ion-toolbar>
+    <ion-title>Xlia Mobile</ion-title>
+    <ion-buttons slot="end" style="display: flex; justify-content: center; align-items: center;">
+      <p style="display: flex; justify-content: center; align-items: center; color: black; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; margin: 6%">{{ currentDate | date:'dd/MM/yyyy' }}</p>
+    </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="returnToMainTable()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title style="font-size: 13px;color: black;" >Nom de agence: {{ nomagence }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+  <div class="table-container" style="overflow-x: auto;">
+    <ion-card>
+    <table>
+      <thead style="background-color: black; color: white;font-size: 15px;">
+        <tr style="background-color: black;color: white;font-size: 15px;">
+          <th style="background-color: black; color: white;font-size: 15px;">Date</th>
+          <th style="background-color: black; color: white;font-size: 15px;">C.A (DT)</th>
+
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of selectedRowData">
+          <td style="font-size: 15px;">{{ product.jour | date : 'dd/MM/yyyy'  }}</td>
+          <td style="font-size: 15px;">{{ product.prix }} </td>
+        </tr>
+      </tbody>
+    </table>
+  </ion-card>
+  </div>
+</ion-content>

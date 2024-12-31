@@ -1,0 +1,14 @@
+{
+  "name": "io.ionic.templates",
+  "integrations": {
+    "capacitor": {}
+  },
+  
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/hotel",
+      "proxyUrl": "http://192.168.3.9:8050"
+    }
+  ]
+}

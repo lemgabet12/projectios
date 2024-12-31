@@ -1,0 +1,179 @@
+ion-toolbar {
+  --background: white;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.text-dark {
+  color: black;
+}
+
+.text-dark {
+  color: black;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.text-dark {
+  color: black;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.overflow-auto {
+  overflow-x: auto;
+}
+
+.mt-3 {
+  margin-top: 3%;
+}
+
+.mt-2 {
+  margin-top: 2%;
+}
+
+.mb-5 {
+  margin-bottom: 5%;
+}
+
+.refrech-button {
+  --background: white;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #ddd;
+  padding: 4px;
+  font-size: 12px;
+}
+
+.table-primary {
+  background-color: lightblue;
+}
+
+.table-success {
+  background-color: lightgreen;
+}
+
+.table-title {
+  font-size: 1.5em;
+  margin-top: 20px;
+}
+
+/* Responsive Styling */
+/* Basic card and chart styling */
+.chart-container {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+/* Small screens (mobile) */
+@media only screen and (max-width: 600px) {
+  ion-title {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .mb-0 {
+    font-size: 10px;
+  }
+
+  .table-bordered th,
+  .table-bordered td {
+    font-size: 10px;
+  }
+
+  .large-chart-container {
+    height: 250px; /* Smaller height for mobile */
+  }
+
+  .table-title {
+    font-size: 1.2em;
+  }
+  .chart-container {
+    padding: 10px; /* Smaller padding for mobile screens */
+  }
+}
+
+/* Medium screens (tablets) */
+@media only screen and (min-width: 600px) and (max-width: 1024px) {
+  ion-title {
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .mb-0 {
+    font-size: 12px;
+  }
+
+  .table-bordered th,
+  .table-bordered td {
+    font-size: 11px;
+  }
+
+  .large-chart-container {
+    height: 300px; /* Suitable for tablets */
+    padding: 10px;
+  }
+
+  .table-title {
+    font-size: 1.4em;
+  }
+  .chart-container {
+    padding: 15px;
+  }
+}
+
+/* Large screens (desktops) */
+@media only screen and (min-width: 1025px) {
+  ion-title {
+    font-size: 18px;
+    margin-left: 3%;
+    text-align: center;
+  }
+
+  .mb-0 {
+    font-size: 14px;
+  }
+
+  .table-bordered th,
+  .table-bordered td {
+    font-size: 12px;
+  }
+
+  .large-chart-container {
+    height: 350px;
+    padding: 15px;
+  }
+
+  .table-title {
+    font-size: 1.5em;
+  }
+  .chart-container {
+    padding: 20px; /* Larger padding for desktops */
+  }
+}

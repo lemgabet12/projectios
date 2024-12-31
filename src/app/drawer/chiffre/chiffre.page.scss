@@ -1,0 +1,224 @@
+/* General Styles */
+.text-center {
+  text-align: center;
+  font-weight: bold;
+}
+
+.current-date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-family: 'Lucida Sans', sans-serif;
+  margin: 6%;
+}
+
+.refresh-button ion-icon {
+  font-size: 1.5em;
+}
+
+ion-button.active {
+  --background: #007bff;
+  color: white;
+}
+
+ion-button {
+  margin: 0 5px;
+}
+
+/* Flip Card Styles */
+.flip-card {
+  width: 100%;
+  height: 220px; /* Fixed height for consistency */
+  perspective: 1000px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  transition: all 0.4s ease-in-out;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.widget {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Slightly darker shadow for better visibility */
+  animation: fadeIn 0.7s ease;
+}
+
+/* Card Title */
+.card-title {
+  font-size: 14px; /* Slightly larger font size for better readability */
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.card-value {
+  font-size: 20px; /* Larger font size for value */
+  font-weight: bold;
+  color: #fff;
+}
+
+.card-currency {
+  font-size: 14px; /* Adjust currency size to be consistent */
+  color: #fff;
+}
+
+/* Sombre Background Colors */
+.lazur-bg {
+  background-color: #1d9a9a; /* Darker teal */
+  color: white;
+}
+
+.navy-bg {
+  background-color: #154a7d; /* Darker navy */
+  color: white;
+}
+
+.yellow-bg {
+  background-color: #d89e5b; /* Darker yellow */
+  color: white;
+}
+
+.red-bg {
+  background-color: #c94343; /* Darker red */
+  color: white;
+}
+
+/* Icon Styles */
+.icon-large {
+  font-size: 50px; /* Consistent icon size */
+  color: white;
+}
+
+/* Text Alignment */
+.text-right {
+  text-align: right;
+}
+
+/* List Card Styles */
+.list-card {
+  display: flex;
+  align-items: center;
+  padding: 15px; /* Increased padding for better spacing */
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly darker shadow for better visibility */
+}
+
+.list-card ion-icon {
+  font-size: 50px; /* Adjusted to match web view */
+  margin-right: 15px;
+}
+
+.list-card ion-label h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.list-card ion-label p {
+  margin: 5px 0;
+}
+
+/* Animations */
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-left {
+  animation: slide-in-left 0.7s ease-out;
+}
+
+.slide-in-right {
+  animation: slide-in-right 0.7s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 767px) {
+  .flip-card {
+    height: 220px; /* Consistent height on mobile */
+    margin-bottom: 10px; /* Adjust margin for better spacing */
+  }
+
+  .icon-large {
+    font-size: 50px; /* Consistent icon size on mobile */
+  }
+
+  .card-title, .card-value, .card-currency {
+    font-size: 12px; /* Adjust font size for better readability */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .flip-card {
+    height: 220px; /* Consistent height on very small screens */
+    margin-bottom: 5px; /* Further adjust margin */
+  }
+
+  .icon-large {
+    font-size: 90px; /* Ensure icon size is consistent */
+  }
+
+  .card-title, .card-value, .card-currency {
+    font-size: 35px; /* Ensure text remains readable */
+  }
+}

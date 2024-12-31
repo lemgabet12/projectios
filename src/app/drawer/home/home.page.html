@@ -1,0 +1,116 @@
+<ion-header class="ion-no-border" style="margin-top: 5%;">
+  <ion-toolbar>
+    <ion-title class="text-center" style="font-size:20px; margin: 0 auto;">Xlia Mobile</ion-title>
+    <ion-buttons slot="end" style="display: flex; justify-content: center; align-items: center;">
+      <p class="mb-0" style="display: flex; justify-content: center; align-items: center; color: black; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; margin: 6%">{{currentDate | date:'dd/MM/yyyy'}}</p>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="RefreshProcedure()" class="refrech-button"><img src="../../../assets/icon/arrows-rotate-solid.svg" alt="refresh" /></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="night-mode" >
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)"> 
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="bubbles" refreshingText="Actualiser..."> 
+    </ion-refresher-content> 
+  </ion-refresher>
+
+  <ion-grid class="tablette">
+    <ion-row>
+      <ion-col style="opacity: 1;">
+        <h1 class="bg-white text-center text-dark" style="font-size: 20px;">Taux d'occupation de la journée</h1>
+        <ion-card *ngIf="isDataLoaded">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="text-center text-dark" style="font-size: 12px;">Libellé</th>
+                <th class="text-center text-dark" style="font-size: 12px;">Chambre</th>
+                <th class="text-center text-dark" style="font-size: 12px;">%T.O</th>
+                <th class="text-center text-dark" style="font-size: 12px;">Pax</th>
+                <th class="text-center text-dark" style="font-size: 12px;">%T.O</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of DataOccupation; let i = index" [ngClass]="{'table-primary': i === 2, 'table-success':  i === 4}">
+                <td class="text-center text-dark" style="font-size: 12px;text-align: center;">{{p.labelle | titlecase}}</td>
+                <td class="text-center text-dark" style="font-size: 12px;text-align: center;">{{p.chambre}}</td>
+                <td class="text-center text-dark" style="font-size: 12px;text-align: center;">{{p.tau }}% </td>
+                <td class="text-center text-dark" style="font-size: 12px;text-align: center;">{{p.pax }} </td>
+                <td class="text-center text-dark" style="font-size: 12px;text-align: right">{{p.taux }}% </td>
+              </tr>
+            </tbody>
+          </table>
+        </ion-card>
+      
+       
+        
+        <h1 class="table-title text-center bg-white text-dark mt-3" style="font-size: 20px;">Prévisions d'une semaine Chambre</h1>
+        <div class="overflow-auto">
+          <ion-card *ngIf="isDataLoaded">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="text-center text-dark" style="font-size: 12px;">Journée</th>
+                  <th class="text-center text-dark" style="font-size: 12px;">Départ</th>
+                  <th class="text-center text-dark" style="font-size: 12px;">Arrivée</th>
+                  <th class="text-center text-dark" style="font-size: 12px;">Chambre</th>
+                  <th class="text-center text-dark" style="font-size: 12px;">%T.O</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let c of DataOccupationPrev">
+                  <td class="text-center text-dark" style="font-size: 12px;text-align: center;">{{c.jour }}</td>
+                  <td class="text-center text-dark" style="font-size: 12px;text-align: center;">{{c.dep_chb}}</td>
+                  <td class="text-center text-dark" style="font-size: 12px;text-align: center;">{{c.arr_chb}}</td>
+                  <td class="text-center text-dark" style="font-size: 12px;text-align: center;">{{c.chb}}</td>
+                  <td class="text-right text-dark" style="font-size: 12px;text-align: center;">{{c.taux_chb}}% </td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-card>
+        </div>
+        <h1 class="table-title text-center bg-white text-dark mt-3" style="font-size: 20px;">Prévisions d'une semaine Pax</h1>
+        <div class="overflow-auto mt-2 mb-5">
+          <ion-card *ngIf="isDataLoaded">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="text-center text-dark" style="font-size: 12px;">Journée</th>
+                  <th class="text-center text-dark" style="font-size: 12px;">Départ</th>
+                  <th class="text-center text-dark" style="font-size: 12px;">Arrivée</th>
+                  <th class="text-center text-dark" style="font-size: 12px;">Pax</th>
+                  <th class="text-center text-dark" style="font-size: 12px;">%T.O</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let c of DataPaxOccupationPrev">
+                  <td class="text-center text-dark" style="font-size: 12px; text-align: center;">{{c.jour }}</td>
+                  <td class="text-center text-dark" style="font-size: 12px;text-align: center;">{{c.dep_pax}}</td>
+                  <td class="text-center text-dark" style="font-size: 12px;text-align: center;">{{c.arr_pax}}</td>
+                  <td class="text-center text-dark" style="font-size: 12px;text-align: center;">{{c.pax}}</td>
+                  <td class="text-right text-dark" style="font-size: 12px;text-align: right;">{{c.taux_pax}}% </td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-card>
+        </div>
+      </ion-col>
+      <ion-col size="12" size-md="12">
+      <h1 class="table-title text-center bg-white text-dark mt-3" style="font-size: 16px;">Chart Prévisionnel de Taux d'Occupation </h1>
+      </ion-col>
+      
+      <ion-col size="12" size-md="12">
+          <ion-card >
+            <div style="height: 200px;" class="chart-container">
+              <canvas style="height: 200px;" id="MyChart1"></canvas>
+            </div>
+          </ion-card>
+        </ion-col>
+    
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

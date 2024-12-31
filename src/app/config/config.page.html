@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Configuration</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="config-card">
+    <h2 class="config-title">Configurer le Serveur</h2>
+    
+    <form (ngSubmit)="saveConfig()" #configForm="ngForm">
+      
+      <ion-item>
+        <ion-label position="stacked">
+          <ion-icon name="link-outline" slot="start"></ion-icon>
+          URL du serveur
+        </ion-label>
+        <ion-input 
+          [(ngModel)]="serverUrl" 
+          name="serverUrl" 
+          placeholder="Entrez l'URL du serveur"
+          required 
+          type="url" 
+          #serverUrlInput="ngModel"
+          [class.invalid-input]="serverUrlInput.invalid && serverUrlInput.touched">
+        </ion-input>
+      </ion-item>
+      <div *ngIf="serverUrlInput.invalid && serverUrlInput.touched" class="error-message">
+        Veuillez entrer une URL valide.
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">
+          <ion-icon name="key-outline" slot="start"></ion-icon>
+          Port
+        </ion-label>
+        <ion-input 
+          [(ngModel)]="port" 
+          name="port" 
+          placeholder="Entrez le port" 
+          type="number" 
+          required
+          min="1" 
+          max="65535"
+          #portInput="ngModel"
+          [class.invalid-input]="portInput.invalid && portInput.touched">
+        </ion-input>
+      </ion-item>
+      <div *ngIf="portInput.invalid && portInput.touched" class="error-message">
+        Veuillez entrer un numéro de port valide (entre 1 et 65535).
+      </div>
+
+      <ion-button expand="full" type="submit" [disabled]="configForm.invalid" class="submit-button">
+        Enregistrer la configuration
+      </ion-button>
+    </form>
+
+    <!-- Success and Error Messages -->
+    <ion-toast 
+      *ngIf="showMessage" 
+      [message]="message" 
+      [color]="messageColor" 
+      duration="2000" 
+      position="top">
+    </ion-toast>
+  </div>
+</ion-content>

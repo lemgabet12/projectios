@@ -1,0 +1,95 @@
+/* Overall body styling */
+body {
+  background: linear-gradient(to right, #8360c3, #2ebf91);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: #ffffff;
+}
+
+/* Container styling */
+.container {
+  margin-top: 4rem;
+}
+
+/* Card styling */
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.95);
+  color: #333333;
+}
+
+/* Card header styling */
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e8e8e8;
+  border-radius: 15px 15px 0 0;
+  padding: 1rem;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.btn-link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 1.25rem;
+  background: none;
+  border: none;
+}
+
+.btn-link:hover {
+  color: #0056b3;
+}
+
+/* Card body styling */
+.card-body {
+  padding: 2rem;
+}
+
+/* Button styling */
+.btn {
+  font-size: 1rem;
+  padding: 12px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  border: none;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Primary button styling */
+.btn-primary {
+  background-color: #2ebf91;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #28a57a;
+}
+
+/* Secondary button styling */
+.btn-secondary {
+  background-color: #6c757d;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background-color: #545b62;
+}
+
+/* Flex styling */
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,0 +1,179 @@
+ion-toolbar {
+  --background: white;
+
+  @media (prefers-color-scheme: dark) {
+    --background: var(--ion-background-color);
+  }
+}
+
+.md ion-toolbar {
+  --padding-top: var(--status-bar-height);
+}
+
+ion-title {
+  font-size: 20px;
+  font-family: WorkSans-Bold;
+  color: var(--color-darkText);
+}
+
+.date-pickers {
+  display: flex;
+  justify-content: center; /* Center the date pickers */
+  align-items: center; /* Align items vertically */
+  padding: 16px;
+}
+
+.chart-container {
+  position: relative;
+  margin: 20px auto;
+  height: 400px; /* Ensure this matches the height set in the canvas */
+  width: 80%; /* Or your desired width */
+}
+
+ion-title.md {
+  text-align: center;
+  margin-left: 48px; /* menu icon space */
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.data-grid {
+  width: 100%;
+}
+
+.data-header {
+  background-color: #23272c; /* Header background color */
+  color: #fff; /* Header text color */
+  font-weight: bold;
+  border-bottom: 2px solid #282e35; /* Header bottom border */
+}
+
+.data-header-cell,
+.data-cell {
+  padding: 12px; /* Padding for cells */
+  text-align: center; /* Center-align cell content */
+}
+
+.data-cell {
+  border-bottom: 1px solid #ccc; /* Border between rows */
+}
+
+.data-row:nth-child(even) {
+  background-color: #f8f9fa; /* Alternate row background color */
+}
+
+.data-row:hover {
+  background-color: #e9ecef; /* Hover background color */
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  background-color: rgba(255, 255, 255, 0.8); /* Adjust the opacity as needed */
+}
+
+/* Add this in your global styles or in the component's styles */
+.refrech-button {
+  --background: white;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 4px;
+  border: 1px solid #ddd;
+  font-size: 11px; /* Add borders to cells */
+}
+
+th {
+  background-color: #f2f2f2;
+  font-size: 9px; /* Add a background color for headers */
+}
+
+.table-title {
+  text-align: center;
+  margin-top: 20px; /* Adjust the margin as needed */
+  font-size: 1.5em; /* Adjust the font size as needed */
+  color: #fff; /* Set the color of the title text */
+}
+
+.table-description {
+  text-align: left;
+  font-size: 1em; /* Adjust the font size as needed */
+  color: #eee; /* Set the color of the description text */
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.custom-datetime {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --border-radius: 8px;
+  --background: #f7f7f7; /* Light background for the date picker */
+  --color: #333; /* Text color */
+  font-weight: bold; /* Make the text bold */
+}
+
+.calendar-icon {
+  font-size: 24px; /* Adjust the size of the calendar icon */
+  color: #ebb625; /* Icon color */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.calendar-icon:hover {
+  color: #dd9932; /* Darker shade on hover */
+}
+
+.table-container {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: white; /* White background for the table */
+  padding: 20px;
+}
+
+.input-daterange {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align items in the column center */
+  margin-right: 10px; /* Adjust space between columns */
+}
+
+.input-group-addon {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.calendar-icon {
+  font-size: 20px;
+}
+
+.fetch-button {
+  margin-top: 20px;
+  background-color: #3880ff;
+  color: white;
+}
+
+.input-group-addon {
+  display: flex;
+  align-items: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}

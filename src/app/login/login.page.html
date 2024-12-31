@@ -1,0 +1,85 @@
+<div class="login-background">
+  <div class="login-card">
+    <div class="logo-container text-center mb-4">
+      <img src="../../assets/images/xliaarab.png" width="100" alt="Logo" />
+    </div>
+    <form (ngSubmit)="login()">
+      <div *ngIf="errorMessage" class="text-danger mb-3">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Email/Telephone Input -->
+      <div class="form-group mb-3">
+        <label for="emailOrTelephone">Email/Téléphone</label>
+        <ion-input
+          type="text"
+          id="emailOrTelephone"
+          required
+          [(ngModel)]="emailOrTelephone"
+          name="emailOrTelephone"
+          (ionInput)="checkInputForHotelDropdown()"
+        ></ion-input>
+      </div>
+
+      <!-- Password Input with Toggle -->
+      <div class="form-group mb-3">
+        <label for="password">Mot de passe</label>
+        <div class="input-group">
+          <ion-input
+            [type]="passwordFieldType"
+            id="password"
+            required
+            [(ngModel)]="password"
+            name="password"
+          ></ion-input>
+          <ion-button fill="clear" (click)="togglePasswordVisibility()">
+            <ion-icon [name]="passwordVisible ? 'eye' : 'eye-off'"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+
+      <!-- Hotel Selection Dropdown -->
+      <div *ngIf="showHotelSelect" class="form-group mb-3">
+        <label for="hotel">Sélectionnez votre hôtel</label>
+        <ion-select
+          [(ngModel)]="selectedHotel"
+          name="hotel"
+          id="hotel"
+          (ionChange)="onHotelChange()"
+        >
+          <ion-select-option
+            *ngFor="let hotel of hotels"
+            [value]="hotel.namehotel"
+          >
+            {{ hotel.namehotel }}
+          </ion-select-option>
+        </ion-select>
+      </div>
+
+      <!-- Remember Me Checkbox -->
+      <div *ngIf="showHotelSelect" class="form-group mb-3 d-flex align-items-center">
+        <ion-checkbox
+          [(ngModel)]="rememberMe"
+          name="rememberMe"
+          color="primary"
+        ></ion-checkbox>
+        <label class="ml-2">Se souvenir de moi</label>
+      </div>
+
+      <!-- Buttons -->
+      <ion-button expand="block" color="primary" type="submit">
+        Se connecter
+      </ion-button>
+      <ion-button
+        style="overflow-x: auto;"
+        type="button"
+        expand="block"
+        color="light"
+        (click)="navigateToRegister()"
+      >
+        Inscription
+      </ion-button>
+    </form>
+    <ion-content scrollPadding="true"></ion-content>
+  </div>
+</div>
