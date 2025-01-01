@@ -3,9 +3,7 @@ require_relative '../../node_modules/@capacitor/ios/scripts/pods_helpers'
 platform :ios, '13.0'
 use_frameworks!
 
-# workaround to avoid Xcode caching of Pods that requires
-# Product -> Clean Build Folder after new Cordova plugins installed
-# Requires CocoaPods 1.6 or newer
+# Prevent Xcode caching of Pods; requires CocoaPods 1.6 or newer
 install! 'cocoapods', :disable_input_output_paths => true
 
 def capacitor_pods
@@ -22,9 +20,10 @@ end
 
 target 'App' do
   capacitor_pods
-  # Add your Pods here
+  # Add your other Pods here if needed
 end
 
+# Post-install script to ensure the correct deployment target
 post_install do |installer|
-  assertDeploymentTarget(installer)
+  assertDeploymentTarget(installer) # Ensure this function is defined
 end
