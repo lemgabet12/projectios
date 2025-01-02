@@ -23,7 +23,11 @@ target 'App' do
   # Add your other Pods here if needed
 end
 
-# Post-install script to ensure the correct deployment target
+# Post-install script to ensure compatibility with the iOS deployment target
 post_install do |installer|
-  assertDeploymentTarget(installer) # Ensure this function is defined
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+    end
+  end
 end
