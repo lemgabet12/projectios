@@ -1,31 +1,21 @@
-workflows:
-  ios-build:
-    name: Build iOS app
-    environment:
-      groups:
-        - apple_credentials
-        - default
-      vars:
-        NODE_VERSION: 16
-    scripts:
-      - name: Install dependencies
-        script: npm install --force
-      - name: Build Ionic app
-        script: ionic build --prod
-      - name: Sync Capacitor
-        script: ionic cap sync ios
-      - name: Install CocoaPods
-        script: cd ios/App && pod install
-      - name: Build .ipa file
-        script: |
-          xcodebuild -workspace ios/App/App.xcworkspace \
-          -scheme App \
-          -configuration Release \
-          -archivePath $PWD/build/App.xcarchive \
-          archive DEVELOPMENT_TEAM=YOUR_TEAM_ID
-          xcodebuild -exportArchive \
-          -archivePath $PWD/build/App.xcarchive \
-          -exportPath $PWD/build \
-          -exportOptionsPlist ./ExportOptions.plist
-    artifacts:
-      - ios/App/build/*.ipa
+scripts:
+  - name: Build unsigned IPA
+    script: |
+      cd ios
+      xcodebuild -workspace App.xcworkspace \
+                 -scheme App \
+                 -configuration Release \
+                 -sdk iphoneos \
+                 -archivePath $PWD/build/App.xcarchive archive \
+                 CODE_SIGN_IDENTITY="" \
+                 CODE_SIGNING_REQUIRED=NO \
+                 CODE_SIGN_ENTITLEMENTS="" \
+                 CODE_SIGNING_ALLOWED=NO
+      xcodebuild -exportArchive \
+                 -archivePath $PWD/build/App.xcarchive \
+                 -exportPath $PWD/build/ \
+                 -exportOptionsPlist ExportOptions.plist \
+                 CODE_SIGN_IDENTITY="" \
+                 CODE_SIGNING_REQUIRED=NO \
+                 CODE_SIGN_ENTITLEMENTS="" \
+                 CODE_SIGNING_ALLOWED=NO
