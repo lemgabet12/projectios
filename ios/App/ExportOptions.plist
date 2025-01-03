@@ -1,17 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>method</key>
-    <string>development</string>
-    <key>signingStyle</key>
-    <string>manual</string>
-    <key>provisioningProfiles</key>
-    <dict>
-        <key>com.example.app</key>
-        <string>ProvisioningProfileName</string>
-    </dict>
-    <key>teamID</key>
-    <string>YOUR_TEAM_ID</string>
-</dict>
-</plist>
+scripts:
+  - name: Generate ExportOptions.plist
+    script: |
+      cat <<EOF > ios/ExportOptions.plist
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+      <plist version="1.0">
+      <dict>
+          <key>method</key>
+          <string>development</string>
+          <key>signingStyle</key>
+          <string>manual</string>
+      </dict>
+      </plist>
+      EOF
+  - name: Build .ipa
+    script: |
+      cd ios
+      xcodebuild -workspace App.xcworkspace \
+                 -scheme App \
+                 -configuration Release \
+                 -sdk iphoneos \
+                 -archivePath $PWD/build/App.xcarchive archive
+      xcodebuild -exportArchive \
+                 -archivePath $PWD/build/App.xcarchive \
+                 -exportPath $PWD/build/ \
+                 -exportOptionsPlist ExportOptions.plist
