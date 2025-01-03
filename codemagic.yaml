@@ -1,41 +1,19 @@
 workflows:
-  ionic_app_build:
-    name: Ionic App Build Workflow
+  angular_build:
+    name: Angular Build Workflow
     environment:
+      groups:
+        - angular_env_variables  # A group to manage your environment variables
       vars:
-        NODE_VERSION: 16  # Specify your Node.js version
-      flutter: stable  # Optional: if you use Flutter in your project
-      xcode: latest  # Use the latest Xcode version
+        NODE_ENV: development  # Example variable
     scripts:
-      - name: Install dependencies
-        script: npm install
-      - name: Build Ionic project for production
-        script: ionic build --prod
-      - name: Add Capacitor platforms
+      - name: Install dependencies with --force
+        script: npm install --force
+      - name: Set environment variables
         script: |
-          npx cap add android
-          npx cap add ios
-      - name: Sync Capacitor
-        script: npx cap sync
-      - name: Build Android APK
-        script: cd android && ./gradlew assembleRelease
-      - name: Prepare iOS project
-        script: |
-          cd ios
-          pod install
-          cd ..
-      - name: Build iOS .ipa file
-        script: |
-          xcodebuild -workspace ios/App.xcworkspace \
-          -scheme App \
-          -configuration Release \
-          -sdk iphoneos \
-          -archivePath $PWD/build/App.xcarchive archive
-
-          xcodebuild -exportArchive \
-          -archivePath $PWD/build/App.xcarchive \
-          -exportOptionsPlist ios/exportOptions.plist \
-          -exportPath $PWD/build
+          echo "Setting up environment variables"
+          export API_URL="http://example.com/api"
+      - name: Build Angular app
+        script: npm run build -- --configuration production
     artifacts:
-      - build/*.ipa
-      - android/app/build/outputs/apk/release/app-release.apk
+      - dist/**
