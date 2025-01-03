@@ -1,19 +1,24 @@
 workflows:
-  angular_build:
-    name: Angular Build Workflow
+  ios-build:
+    name: iOS Build Workflow
     environment:
       groups:
-        - angular_env_variables  # A group to manage your environment variables
-      vars:
-        NODE_ENV: development  # Example variable
+        - default
     scripts:
-      - name: Install dependencies with --force
-        script: npm install --force
-      - name: Set environment variables
+      - name: Install dependencies
         script: |
-          echo "Setting up environment variables"
-          export API_URL="http://example.com/api"
-      - name: Build Angular app
-        script: npm run build -- --configuration production
+          npm install --force
+      - name: Build Ionic App
+        script: |
+          ionic build --prod
+      - name: Prepare Capacitor for iOS
+        script: |
+          ionic cap add ios
+          ionic cap sync ios
+      - name: Build .ipa file
+        script: |
+          cd ios/App
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath $PWD/build/App.xcarchive archive
+          xcodebuild -exportArchive -archivePath $PWD/build/App.xcarchive -exportPath $PWD/build -exportOptionsPlist ExportOptions.plist
     artifacts:
-      - dist/**
+      - build/*.ipa
