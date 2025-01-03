@@ -1,27 +1,31 @@
 workflows:
   ios-build:
-    name: iOS Build Workflow
+    name: Build iOS app
     environment:
       groups:
+        - apple_credentials
         - default
+      vars:
+        NODE_VERSION: 16
     scripts:
       - name: Install dependencies
-        script: |
-          npm install --force
-      - name: Build Ionic App
-        script: |
-          ionic build --prod
-      - name: Prepare Capacitor for iOS
-        script: |
-          ionic cap add ios
-          ionic cap sync ios
-      - name: Set Signing Info
-        script: |
-          sed -i '' "s/DEVELOPMENT_TEAM = .*/DEVELOPMENT_TEAM = YOUR_TEAM_ID;/g" ios/App/App.xcodeproj/project.pbxproj
+        script: npm install --force
+      - name: Build Ionic app
+        script: ionic build --prod
+      - name: Sync Capacitor
+        script: ionic cap sync ios
+      - name: Install CocoaPods
+        script: cd ios/App && pod install
       - name: Build .ipa file
         script: |
-          cd ios/App
-          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath $PWD/build/App.xcarchive archive
-          xcodebuild -exportArchive -archivePath $PWD/build/App.xcarchive -exportPath $PWD/build -exportOptionsPlist ExportOptions.plist
+          xcodebuild -workspace ios/App/App.xcworkspace \
+          -scheme App \
+          -configuration Release \
+          -archivePath $PWD/build/App.xcarchive \
+          archive DEVELOPMENT_TEAM=YOUR_TEAM_ID
+          xcodebuild -exportArchive \
+          -archivePath $PWD/build/App.xcarchive \
+          -exportPath $PWD/build \
+          -exportOptionsPlist ./ExportOptions.plist
     artifacts:
-      - build/*.ipa
+      - ios/App/build/*.ipa
